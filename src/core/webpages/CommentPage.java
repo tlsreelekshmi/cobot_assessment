@@ -1,2 +1,7 @@
-package webpages;public class CommentPage {
+package webpages;
+
+public class CommentPage extends BaseWebPage {
+    public CommentPage() {
+        waitUntilPageIsLoaded();
+    }
 }
