@@ -81,11 +81,13 @@ public class VideoPage extends BaseWebPage {
     }
 
     public void playNextVideo() {
+        System.out.println("Playing next video..");
         nextVideoButton().click();
     }
 
     public void playPrevVideo() {
-        prevVideoButton().click();
+        System.out.println("Playing previous video..");
+        clickElementWithJs(prevVideoButton());
     }
 
     public void clickSpeakerButton() {
