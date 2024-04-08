@@ -21,9 +21,9 @@ public class VideoPlayerTest extends BaseTest {
         SleepUtils.sleep(5);
         videoPage.playPrevVideo();
         SleepUtils.sleep(5);
-        videoPage.clickSpeakerButton(); //Mute video
+        videoPage.clickMuteButton(); //Mute video
         SleepUtils.sleep(2);
-        videoPage.clickSpeakerButton(); //Un Mute video
+        videoPage.clickUnMuteButton(); //Un Mute video
         videoPage.finishCurrentVideo();
     }
 }

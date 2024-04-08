@@ -77,7 +77,11 @@ public class VideoPage extends BaseWebPage {
     }
 
     WebElement muteVideoButton() {
-        return driver.findElement(By.xpath("//div[@class='vjs-volume-menu-button']//div[contains(text(), 'Mute')]"));
+        return driver.findElement(By.xpath("//div[contains(@class,'vjs-volume-menu-button')]//span[contains(text(), 'Mute')]"));
+    }
+
+    WebElement unMuteVideoButton() {
+        return driver.findElement(By.xpath("//div[contains(@class, 'vjs-volume-menu-button') and @aria-pressed]//span[text()='Unmute']"));
     }
 
     public void playNextVideo() {
@@ -90,8 +94,12 @@ public class VideoPage extends BaseWebPage {
         clickElementWithJs(prevVideoButton());
     }
 
-    public void clickSpeakerButton() {
-        muteVideoButton().click();
+    public void clickMuteButton() {
+        clickElementWithJs(muteVideoButton());
+    }
+
+    public void clickUnMuteButton() {
+        clickElementWithJs(unMuteVideoButton());
     }
 
     public void finishCurrentVideo() {
