@@ -95,10 +95,12 @@ public class VideoPage extends BaseWebPage {
     }
 
     public void clickMuteButton() {
+        System.out.println("Click on mute button");
         clickElementWithJs(muteVideoButton());
     }
 
     public void clickUnMuteButton() {
+        System.out.println("Click on un mute button");
         clickElementWithJs(unMuteVideoButton());
     }
 
