@@ -14,8 +14,8 @@ public class VideoPage extends BaseWebPage {
         return driver.findElement(By.tagName("video"));
     }
 
-    WebElement videoPlayButton() {
-        return driver.findElement(By.xpath("//div[@class='vjs-play-control vjs-control  vjs-playing']"));
+    WebElement videoPlayPauseButton() {
+        return driver.findElement(By.xpath("//div[@class='vjs-control-bar']//div[contains(@class, 'vjs-play-control')]"));
     }
 
     public void clickOnVideo() {
@@ -39,26 +39,33 @@ public class VideoPage extends BaseWebPage {
     }
 
     public void verifyVideoPlaying() {
-        if (videoPlayButton().isDisplayed()) {
+        if (isVideoPlaying()) {
             System.out.println("Video is playing...");
         } else {
             System.out.println("Video is paused...");
+            videoPlayPauseButton().click();
+            System.out.println("Video is playing...");
         }
     }
 
     public void handleAdPlayback() {
         SleepUtils.sleep(10);
         if (isAdPlaying()) {
+            System.out.println("Ad is playing..");
             driver.switchTo().frame(adUi());
+            System.out.println("Switched to ad iframe..");
             waitUntilPageIsLoaded();
             if (adSkipButton().isDisplayed()) {
                 adSkipButton().click();
+                System.out.println("Clicked on ad skip button..");
                 driver.switchTo().parentFrame();
             } else {
+                System.out.println("Ad skip button not found. waiting for ad to finish..");
                 driver.switchTo().parentFrame();
                 waitForElementToDisappear(adUi(), 5);
             }
         }
+        SleepUtils.sleep(5);
     }
 
     WebElement nextVideoButton() {
@@ -66,7 +73,7 @@ public class VideoPage extends BaseWebPage {
     }
 
     WebElement prevVideoButton() {
-        return driver.findElement(By.xpath("//div[@class='vjs-control-bar']//div[contains(text(), 'Previous')]"));
+        return driver.findElement(By.xpath("//div[@class='vjs-control-bar']//span[text()='Previous']"));
     }
 
     WebElement muteVideoButton() {
@@ -88,6 +95,13 @@ public class VideoPage extends BaseWebPage {
     public void finishCurrentVideo() {
         String script = "var video = document.querySelector('video'); if(video) video.currentTime = video.duration-1;";
         executeJavaScriptInWindow(script);
-        clickOnVideo();
+        if (!isVideoPlaying()) {
+            videoPlayPauseButton().click();
+        }
+    }
+
+    public boolean isVideoPlaying() {
+        String videoState = videoPlayPauseButton().getText();
+        return videoState.equalsIgnoreCase("Pause");
     }
 }

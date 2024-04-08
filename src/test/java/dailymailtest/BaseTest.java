@@ -38,12 +38,12 @@ public class BaseTest {
 
     public void openUrl() {
         String url = "https://www.dailymail.co.uk";
-        System.out.println("Launching URL..." + url);
+        System.out.printf("Launching URL %s... %n", url);
         driver.get(url);
     }
 
     public void openUrl(String url) {
-        System.out.println("Navigates to URL..." + url);
+        System.out.printf("Navigates to %s ... %n", url);
         driver.navigate().to(url);
     }
 

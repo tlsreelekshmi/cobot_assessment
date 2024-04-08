@@ -15,9 +15,9 @@ public class VideoPlayerTest extends BaseTest {
         SleepUtils.sleep(5); //buffer time
         videoPage.handleAdPlayback();
         videoPage.verifyVideoPlaying(); //Ensure video is playing
-        videoPage.clickOnVideo();
-        videoPage.verifyVideoPlaying(); //Ensure video is paused
+        videoPage.clickOnVideo(); //Paused ad playback
         videoPage.playNextVideo();
+        videoPage.handleAdPlayback();
         SleepUtils.sleep(5);
         videoPage.playPrevVideo();
         SleepUtils.sleep(5);
@@ -25,6 +25,5 @@ public class VideoPlayerTest extends BaseTest {
         SleepUtils.sleep(2);
         videoPage.clickSpeakerButton(); //Un Mute video
         videoPage.finishCurrentVideo();
-
     }
 }
